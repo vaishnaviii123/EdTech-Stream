@@ -19,6 +19,7 @@ import {
 } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import * as Notifications from "expo-notifications";
+import { colors } from "../theme/colors";  
 
 type NavProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 
@@ -34,7 +35,7 @@ export default function HomeScreen(): React.JSX.Element {
   useEffect(() => {
     Notifications.requestPermissionsAsync().catch(() => {});
 
-    // 👇 listener: when user taps the notification, navigate
+    // when user taps the notification, navigate
     const sub = Notifications.addNotificationResponseReceivedListener(
       (response) => {
         const data = response.notification.request.content.data;
@@ -56,7 +57,7 @@ export default function HomeScreen(): React.JSX.Element {
   };
 
   const sendPlayAndNavigate = async () => {
-    // 👇 schedule notification (delayed 2–3s)
+    // notification (delayed 2–3s)
     const delay = Math.floor(Math.random() * 2) + 2;
     await Notifications.scheduleNotificationAsync({
       content: {
@@ -71,7 +72,7 @@ export default function HomeScreen(): React.JSX.Element {
       trigger: { seconds: delay, channelId: "default" },
     });
 
-    // 👇 immediately navigate
+    // immediately navigate
     navigation.navigate("Video", {
       videoUrl: VIDEO_URL,
       title: "Big Buck Bunny",
@@ -80,7 +81,7 @@ export default function HomeScreen(): React.JSX.Element {
 
   return (
     <SafeAreaView style={styles.container} edges={[ "bottom"]}>
-      {/* Centered title only */}
+     
       <Appbar.Header mode="center-aligned" style={styles.header}>
         <Appbar.Content title="EdTech Stream" titleStyle={styles.headerTitle} />
       </Appbar.Header>
@@ -95,7 +96,7 @@ export default function HomeScreen(): React.JSX.Element {
           />
         }
       >
-        {/* Hero card */}
+        
         <View style={styles.heroCard}>
           <View style={styles.heroMedia}>
             <Image
@@ -108,16 +109,14 @@ export default function HomeScreen(): React.JSX.Element {
               colors={["transparent", "rgba(0,0,0,0.6)"]}
               style={StyleSheet.absoluteFill}
             />
-            {/* Centered Play button */}
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={sendPlayAndNavigate} // 👈 trigger notification instead of direct navigation
+              onPress={sendPlayAndNavigate} 
               style={styles.playCenter}
             >
               <Ionicons name="play-circle" size={78} color="#ffffff" />
             </TouchableOpacity>
 
-            {/* Bottom text overlay */}
             <View style={styles.heroTextWrap}>
               <Text style={styles.heroTitle}>Big Buck Bunny</Text>
               <Text style={styles.heroSubtitle}>
@@ -126,7 +125,6 @@ export default function HomeScreen(): React.JSX.Element {
             </View>
           </View>
 
-          {/* Action row */}
           <View style={styles.actionRow}>
             <Button
               mode="contained"
@@ -148,7 +146,7 @@ export default function HomeScreen(): React.JSX.Element {
                     title: "No Info Available 📭",
                     body: "We don’t have extra details for this video right now. Stay tuned!",
                   },
-                  trigger: null, // instant
+                  trigger: null, 
                 })
               }
             >
@@ -158,7 +156,6 @@ export default function HomeScreen(): React.JSX.Element {
         </View>
       </ScrollView>
 
-      {/* Bottom bar */}
       <View
         style={[
           styles.bottomBar,
@@ -183,17 +180,17 @@ export default function HomeScreen(): React.JSX.Element {
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#121212" },
-  header: { backgroundColor: "#121212", elevation: 0 },
-  headerTitle: { color: "#fff", fontWeight: "700", fontSize: 18 },
+  container: { flex: 1, backgroundColor: colors.background },
+  header: { backgroundColor: colors.background, elevation: 0 },
+  headerTitle: { color: colors.text, fontWeight: "700", fontSize: 18 },
+
   heroCard: {
     marginTop: 12,
     marginHorizontal: 12,
     borderRadius: 16,
     overflow: "hidden",
-    backgroundColor: "#1c1c1c",
+    backgroundColor: colors.surface,
     elevation: 4,
   },
   heroMedia: {
@@ -201,7 +198,7 @@ const styles = StyleSheet.create({
     aspectRatio: 16 / 9,
     position: "relative",
     overflow: "hidden",
-    backgroundColor: "#000",
+    backgroundColor: "#000", 
   },
   playCenter: {
     position: "absolute",
@@ -215,16 +212,18 @@ const styles = StyleSheet.create({
     right: 16,
     bottom: 14,
   },
-  heroTitle: { color: "#fff", fontSize: 22, fontWeight: "800" },
-  heroSubtitle: { color: "#cfcfcf", fontSize: 13, marginTop: 4 },
+  heroTitle: { color: colors.text, fontSize: 22, fontWeight: "800" },
+  heroSubtitle: { color: colors.subtitle, fontSize: 13, marginTop: 4 },
+
   actionRow: {
     flexDirection: "row",
     gap: 12,
     padding: 12,
   },
-  primaryBtn: { flex: 1, backgroundColor: "#E50914", borderRadius: 10 },
-  primaryLabel: { color: "#fff", fontWeight: "700" },
-  secondaryBtn: { flex: 1, borderColor: "#fff", borderRadius: 10 },
+  primaryBtn: { flex: 1, backgroundColor: colors.primary, borderRadius: 10 },
+  primaryLabel: { color: colors.text, fontWeight: "700" },
+  secondaryBtn: { flex: 1, borderColor: colors.text, borderRadius: 10 },
+
   bottomBar: {
     position: "absolute",
     left: 0,
@@ -232,13 +231,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     paddingHorizontal: 12,
     paddingTop: 8,
-    backgroundColor: "#121212",
+    backgroundColor: colors.background,
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: "rgba(255,255,255,0.08)",
+    borderTopColor: colors.border,
     elevation: 8,
   },
   bottomButton: {
-    backgroundColor: "#E50914",
+    backgroundColor: colors.primary,
     borderRadius: 12,
     paddingVertical: 6,
   },

@@ -10,6 +10,7 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { colors } from "../theme/colors";
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "WebView">;
 
@@ -22,7 +23,7 @@ export default function WebViewScreen(): React.JSX.Element {
   const isSendingRef = useRef(false);
 
   useEffect(() => {
-    Notifications.requestPermissionsAsync().catch(() => {});
+    Notifications.requestPermissionsAsync().catch(() => { });
   }, []);
 
   const processQueue = async () => {
@@ -31,20 +32,20 @@ export default function WebViewScreen(): React.JSX.Element {
     isSendingRef.current = true;
     const msg = queueRef.current.shift()!;
 
-    // random delay 2–3 sec
+    //  delay 2–3 sec
     const delay = Math.floor(Math.random() * 2) + 2;
 
     setTimeout(async () => {
       try {
         await Notifications.scheduleNotificationAsync({
           content: { title: "Notification 🔔", body: msg },
-          trigger: null, // immediate after timeout
+          trigger: null,
         });
       } catch (err) {
         console.warn("Failed to schedule notification", err);
       } finally {
         isSendingRef.current = false;
-        processQueue(); // process next if exists
+        processQueue();
       }
     }, delay * 1000);
   };
@@ -56,13 +57,11 @@ export default function WebViewScreen(): React.JSX.Element {
 
   return (
     <SafeAreaView style={styles.container} edges={[]}>
-      {/* Header */}
       <Appbar.Header style={styles.header}>
         <Appbar.BackAction color="white" onPress={() => navigation.goBack()} />
         <Appbar.Content title="WebView Page" titleStyle={styles.title} />
       </Appbar.Header>
 
-      {/* WebView */}
       <WebView
         source={{ uri: "https://reactnative.dev/" }}
         style={styles.webview}
@@ -80,7 +79,6 @@ export default function WebViewScreen(): React.JSX.Element {
         }}
       />
 
-      {/* Bottom buttons */}
       <View
         style={[
           styles.btnRow,
@@ -110,29 +108,28 @@ export default function WebViewScreen(): React.JSX.Element {
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#121212" },
-  header: { backgroundColor: "#121212" },
-  title: { color: "#fff" },
+  container: { flex: 1, backgroundColor: colors.background },
+  header: { backgroundColor: colors.background },
+  title: { color: colors.text },
   webview: { flex: 1 },
   loader: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#121212",
+    backgroundColor: colors.background,
   },
   btnRow: {
     flexDirection: "row",
     justifyContent: "space-around",
     paddingTop: 12,
     paddingBottom: 24,
-    backgroundColor: "#1c1c1c",
+    backgroundColor: colors.surface,
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: "rgba(255,255,255,0.1)",
+    borderTopColor: colors.border,
   },
   btnLabel: {
-    color: "#fff",
+    color: colors.text,
     fontWeight: "600",
   },
 });

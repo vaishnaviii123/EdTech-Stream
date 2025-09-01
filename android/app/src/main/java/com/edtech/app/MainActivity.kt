@@ -1,4 +1,4 @@
-package com.anonymous.edtech
+package com.edtech.app
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

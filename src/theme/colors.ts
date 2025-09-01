@@ -1,15 +1,21 @@
-import { MD3DarkTheme } from 'react-native-paper';
+import { MD3DarkTheme } from "react-native-paper";
+
+const colors = {
+  primary: "#E50914",  
+  background: "#121212",
+  surface: "#1c1c1c",
+  text: "#FFFFFF",
+  subtitle: "#cfcfcf",
+  border: "rgba(255,255,255,0.1)",
+};
 
 const theme = {
   ...MD3DarkTheme,
   colors: {
     ...MD3DarkTheme.colors,
-    primary: '#E50914', // Netflix red look
-    background: '#121212',
-    surface: '#1c1c1c',
-    text: '#FFFFFF',
-    accent: '#E50914',
+    ...colors,
   },
 };
 
+export { colors };
 export default theme;

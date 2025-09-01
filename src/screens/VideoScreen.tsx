@@ -12,6 +12,7 @@ import * as ScreenOrientation from "expo-screen-orientation";
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native";
 import type { RootStackParamList } from "../../App";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { colors } from "../theme/colors";  
 
 type VideoRoute = RouteProp<RootStackParamList, "Video">;
 type Nav = NativeStackNavigationProp<RootStackParamList, "Video">;
@@ -200,11 +201,9 @@ export default function VideoScreen(): React.JSX.Element {
             progressUpdateIntervalMillis={500}
           />
 
-          {/* Controls */}
           <Animated.View
             style={[styles.controlsOverlay, { opacity: controlsOpacity }]}
           >
-            {/* Back */}
             <View style={styles.topRow}>
               <IconButton
                 icon="arrow-left"
@@ -215,7 +214,6 @@ export default function VideoScreen(): React.JSX.Element {
               />
             </View>
 
-            {/* Play / Pause */}
             <View style={styles.centerRow}>
               <IconButton
                 icon={isPlaying ? "pause-circle" : "play-circle"}
@@ -225,7 +223,6 @@ export default function VideoScreen(): React.JSX.Element {
               />
             </View>
 
-            {/* Bottom controls */}
             <View style={styles.bottomRightRow}>
               <IconButton
                 icon={muted ? "volume-off" : "volume-high"}
@@ -252,18 +249,17 @@ export default function VideoScreen(): React.JSX.Element {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#000" },
+  container: { flex: 1, backgroundColor: colors.background },
   videoWrapper: {
-    backgroundColor: "#000",
+    backgroundColor: colors.background,
     justifyContent: "center",
     alignItems: "center",
   },
   video: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#000",
+    backgroundColor: colors.background,
   },
   controlsOverlay: {
     position: "absolute",
@@ -277,5 +273,5 @@ const styles = StyleSheet.create({
   topRow: { flexDirection: "row", justifyContent: "flex-start" },
   backBtn: { marginLeft: 4 },
   centerRow: { flex: 1, justifyContent: "center", alignItems: "center" },
-  bottomRightRow: { flexDirection: "row", justifyContent: "flex-end", },
+  bottomRightRow: { flexDirection: "row", justifyContent: "flex-end" },
 });

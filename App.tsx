@@ -21,17 +21,16 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-// keep splash until we hide it manually
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function App(): React.JSX.Element {
   useEffect(() => {
-    // hide splash after short delay
+// show spash screen untill app ready
     const t = setTimeout(() => {
       SplashScreen.hideAsync().catch(() => {});
     }, 1200);
 
-    // ✅ configure foreground notification behavior
+    // configured foreground notification behavior
     Notifications.setNotificationHandler({
       handleNotification: async () => {
         return {
@@ -42,7 +41,7 @@ export default function App(): React.JSX.Element {
       },
     });
 
-    // ✅ create Android channel & request permission
+    // created Android channel & request permission
     const setupNotifications = async () => {
       try {
         if (Platform.OS === "android") {

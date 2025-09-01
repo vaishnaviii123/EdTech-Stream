@@ -1,26 +1,49 @@
-# edtech (Expo) — WebView + Notifications + HLS Video
+# 📱 EdTech Stream – React Native (Expo) Assignment
 
-## How to run
-1. Install deps: `npx expo install @react-navigation/native @react-navigation/native-stack react-native-screens react-native-safe-area-context react-native-webview expo-av expo-notifications`
-2. Start: `npx expo start`
-3. Open in **Expo Go** (scan QR). On device, allow notifications when prompted.
+This is a React Native app built with **Expo** as part of the assignment:  
+**WebView + Notifications + Video Player**.
 
-## What’s implemented
-- `WebView` screen with:
-  - Embedded website (`https://example.com`).
-  - Two buttons that schedule local notifications (2s and 5s delay).
-  - Bonus: notification on WebView load completion.
-  - Tapping the 5s notification opens the Video screen (handled via data payload + listener).
-- `Video` screen:
-  - Plays HLS stream: `https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8`.
-  - Native controls plus custom play/pause, mute, seek, switch-stream buttons.
+---
 
-## Notes & testing tips
-- Notifications: allow permission on device. Foreground notifications are shown because the app sets a notification handler.
-- On some platforms / OS versions, the behavior of scheduled local notifications in Expo Go can differ; building a standalone app gives final behavior.
-- If TypeScript red underlines appear in VSCode, restart the TS server: open command palette -> “TypeScript: Restart TS server”.
+## 🎯 Objective
+The goal of this project is to demonstrate the integration of:
+- A **WebView** page that embeds a website.
+- **Local notifications** triggered by user interactions.
+- An **HLS video player** with custom playback controls.
+- **Navigation** between multiple screens.
 
-## Bonus implemented
-- Notification on WebView finish.
-- Tapping scheduled notification navigates to Video screen.
-- Custom video controls (seek, mute) and stream switching.
+---
+
+## 🛠 Features & Implementation
+
+### 1. WebView Page
+- Embeds [React Native official site](https://reactnative.dev/) inside a WebView.
+- Two buttons (`Notify 1`, `Notify 2`) trigger **local notifications** with random delay (2–3s).
+- **Bonus**: A notification also appears when the page finishes loading.
+
+### 2. Notifications
+- Configured with **Expo Notifications API**.
+- Foreground + background notifications supported.
+- Two distinct messages implemented.
+- On tap, notifications can **navigate to the Video Player screen**.
+
+### 3. Video Player Page
+- Plays an **HLS video** (`Big Buck Bunny`) using Expo’s `expo-av` package.  
+  - Primary stream: `https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8`.
+- Features:
+  - **Play / Pause**
+  - **Mute / Unmute**
+  - **Fullscreen toggle (landscape orientation)**
+  - **Switch between multiple streams** (bonus).
+- Auto-hides playback controls with tap gestures.
+
+### 4. Navigation
+- Implemented using **React Navigation (Native Stack)**.
+- Three screens:
+  - `HomeScreen` → launch video and send notifications.
+  - `VideoScreen` → video player with custom controls.
+  - `WebViewScreen` → embedded site with notifications.
+
+---
+
+## 📂 Project Structure
