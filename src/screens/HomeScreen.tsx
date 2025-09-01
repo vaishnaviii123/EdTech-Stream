@@ -79,7 +79,7 @@ export default function HomeScreen(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+    <SafeAreaView style={styles.container} edges={[ "bottom"]}>
       {/* Centered title only */}
       <Appbar.Header mode="center-aligned" style={styles.header}>
         <Appbar.Content title="EdTech Stream" titleStyle={styles.headerTitle} />

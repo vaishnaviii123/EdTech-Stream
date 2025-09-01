@@ -13,7 +13,8 @@
       "backgroundColor": "#040404"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+        "bundleIdentifier": "com.assignment.edtech"
     },
     "android": {
       "adaptiveIcon": {
